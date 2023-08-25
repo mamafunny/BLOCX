@@ -664,9 +664,9 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     result.pushKV("transactions", transactions);
     result.pushKV("coinbaseaux", aux);
     result.pushKV("coinbasevalue", (int64_t)pblock->vtx[0]->GetValueOut());
-    result.push_back(Pair("ReimbursementFundAddress", GetParams().ReimbursementFundAddress()));
+    result.push_back(Pair("ReimbursementFundAddress", Params().ReimbursementFundAddress()));
     result.push_back(Pair("ReimbursementFundValue", (int64_t)pblock->vtx[0]->vout[1].nValue) );
-    result.push_back(Pair("DevelopmentFundAddress", GetParams().DevelopmentFundAddress()));
+    result.push_back(Pair("DevelopmentFundAddress", Params().DevelopmentFundAddress()));
     result.push_back(Pair("DevelopmentFundValue", (int64_t)pblock->vtx[0]->vout[2].nValue) );
     result.pushKV("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast));
     result.pushKV("target", hashTarget.GetHex());
