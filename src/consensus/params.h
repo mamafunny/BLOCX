@@ -177,7 +177,7 @@ struct Params {
     /** P2PKH or P2SH address for developer funds */
     std::string DevelopmentFundAddress;
     /** percentage of block subsidy going to developer fund */
-    int DevelopementFundShare;
+    int DevelopmentFundShare;
 
     /** P2PKH or P2SH address for developer funds */
     std::string ReimbursementFundAddress;
