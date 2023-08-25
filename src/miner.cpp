@@ -69,7 +69,7 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     const auto& params = chainparams.GetConsensus();
     // Stage 2
     CScript devPayoutScript = GetScriptForDestination(DecodeDestination(params.DevelopmentFundAddress));
-    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
+    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopmentFundShare) / 100;
 
     coinbaseTx.vout[0].nValue -= devPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
