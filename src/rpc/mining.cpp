@@ -352,6 +352,10 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             "      \"flags\" : \"xx\"                  (string) key name is to be ignored, and value included in scriptSig\n"
             "  },\n"
             "  \"coinbasevalue\" : n,              (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in XBLOCX)\n"
+            "  \"ReimbursementFundAddress\" : n, (string) Reimbursement Address\n"
+            "  \"ReimbursementFundValue\" : n,   (numeric) Reimbursement Value, 15% of the coinbase\n"
+            "  \"DevelopmentFundAddress\" : n, (string) Development Address\n"
+            "  \"DevelopmentFundvalue\" : n,   (numeric) Development Value, 3% of the coinbase\n"
             "  \"coinbasetxn\" : { ... },          (json object) information for coinbase transaction\n"
             "  \"target\" : \"xxxx\",                (string) The hash target\n"
             "  \"mintime\" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)\n"
@@ -660,6 +664,10 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     result.pushKV("transactions", transactions);
     result.pushKV("coinbaseaux", aux);
     result.pushKV("coinbasevalue", (int64_t)pblock->vtx[0]->GetValueOut());
+    result.push_back(Pair("ReimbursementFundAddress", GetParams().ReimbursementFundAddress()));
+    result.push_back(Pair("ReimbursementFundValue", (int64_t)pblock->vtx[0]->vout[1].nValue) );
+    result.push_back(Pair("DevelopmentFundAddress", GetParams().DevelopmentFundAddress()));
+    result.push_back(Pair("DevelopmentFundValue", (int64_t)pblock->vtx[0]->vout[2].nValue) );
     result.pushKV("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast));
     result.pushKV("target", hashTarget.GetHex());
     result.pushKV("mintime", (int64_t)pindexPrev->GetMedianTimePast()+1);
