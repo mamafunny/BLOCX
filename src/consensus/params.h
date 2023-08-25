@@ -179,6 +179,11 @@ struct Params {
     /** percentage of block subsidy going to developer fund */
     int DevelopementFundShare;
 
+    /** P2PKH or P2SH address for developer funds */
+    std::string ReimbursementFundAddress;
+    /** percentage of block subsidy going to developer fund */
+    int ReimbursementFundShare;
+
     // Default BIP9Deployment::nWindowSize value for deployments where it's not specified and for unknown deployments.
     uint32_t nMinerConfirmationWindow;
     BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS];
