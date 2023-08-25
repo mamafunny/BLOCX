@@ -69,7 +69,7 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     const auto& params = chainparams.GetConsensus();
     // Stage 2
     CScript devPayoutScript = GetScriptForDestination(DecodeDestination(params.DevelopmentFundAddress));
-    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopmentFundShare) / 100;
+    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
 
     coinbaseTx.vout[0].nValue -= devPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
@@ -77,7 +77,7 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     if (nHeight > 16768 && nHeight <= 24068) {
     // Add 10% to Temporary Masternode Reward Adjustment
     CScript tmpPayoutScript = GetScriptForDestination(DecodeDestination(params.DevelopmentFundAddress));
-    CAmount tmpPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopmentFundShare) / 100;
+    CAmount tmpPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
 
     coinbaseTx.vout[0].nValue -= tmpPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(tmpPayoutValue, tmpPayoutScript));
