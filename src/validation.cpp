@@ -1191,7 +1191,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     }
 
     CAmount nSuperblockPart; 
-    if (nPrevHeight < 16768) {
+    if (nPrevHeight < 16700) {
         nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.05 : 0;    
     } else {
         nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.07 : 0;      
@@ -1202,8 +1202,8 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActivationHeight)
 {
-    if (nHeight > 16768) {
-        if (nHeight < 24068) {
+    if (nHeight > 16700) {
+        if (nHeight < 24000) {
             return static_cast<CAmount>(blockValue * 0.30);
         } else {
             return static_cast<CAmount>(blockValue * 0.45);
@@ -3781,7 +3781,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         nSigOps += GetLegacySigOpCount(*tx);
     }
 
-    if (nHeight > 16768) {
+    if (nHeight > 16700) {
         // "stage 2" interval between first and second halvings
         CScript devPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.DevelopmentFundAddress));
         CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
